@@ -1,0 +1,17 @@
+[package]
+name = "audio_classifier"
+version = "0.1.0"
+edition = "2021"
+
+# Remove any `path` key under [package] if it exists
+
+[dependencies]
+hound = "3.5.0"  # Add any other dependencies you're using
+
+[lib]
+name = "audio_classifier"
+path = "src/lib.rs"
+
+[[bin]]
+name = "audio_classifier"
+path = "src/main.rs"
