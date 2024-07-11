@@ -1,4 +1,5 @@
 // src/lib.rs
+use std::fmt;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct AudioInfo {
     kind: Option<Kind>,
@@ -75,4 +76,47 @@ pub enum Scale {
 pub struct Key {
     pub root: Root,
     pub scale: Scale,
+}
+
+impl fmt::Display for AudioInfo {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "AudioInfo {{ kind: {:?}, inst: {:?}, key: {:?}, bpm: {:?}, length: {:?} }}",
+            self.kind.unwrap_or(Kind::Track), // Provide a default value or handle None case
+            self.inst.unwrap_or(Inst::Other), // Provide a default value or handle None case
+            self.key.unwrap_or(Key {
+                root: Root::C,
+                scale: Scale::Major
+            }), // Provide a default value or handle None case
+            self.bpm.unwrap_or(BPM(120)),     // Provide a default value or handle None case
+            self.length
+        )
+    }
+}
+
+impl fmt::Display for Key {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?} {:?}", self.root, self.scale)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn audio_info_test() {
+        let audio_info_example: AudioInfo;
+        audio_info_example = AudioInfo::new(
+            Some(Kind::Loop),
+            Some(Inst::Bass),
+            Some(Key {
+                root: Root::D,
+                scale: Scale::Minor,
+            }),
+            Some(BPM(120)),
+            Length(14),
+        );
+        println!("example AudioInfo type: {}", audio_info_example);
+    }
 }
