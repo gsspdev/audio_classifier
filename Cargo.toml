@@ -6,12 +6,11 @@ edition = "2021"
 # Remove any `path` key under [package] if it exists
 
 [dependencies]
-glob = "0.3.1"
-hound = "3.5.0"        # Add any other dependencies you're using
-pyo3 = "0.22.1"
+pyo3 = "0.21.2"
 serde = "1.0.204"
 serde_json = "1.0.120"
-wavers = "1.4.3"
+wavers = { version = "1.4.3", features = ["colored", "ndarray", "pyo3"] }
+hound = "3.5.0"
 
 [lib]
 name = "audio_classifier"
@@ -20,3 +19,4 @@ path = "src/lib.rs"
 [[bin]]
 name = "audio_classifier"
 path = "src/main.rs"
+glob = "0.3.1"
