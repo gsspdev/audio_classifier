@@ -37,6 +37,7 @@ fn get_wav_length(file_path: &str) -> io::Result<u32> {
 
 fn main() -> io::Result<()> {
     // use audio_classifier::AudioInfo;
+    
     let audio_info_test = AudioInfo::new(
         Some(Kind::Loop),
         Some(Inst::Bass),
@@ -47,7 +48,7 @@ fn main() -> io::Result<()> {
         Some(BPM(120)),
         Length(14),
     );
-
+    
     println!("example AudioInfo type: {:?}", audio_info_test);
     let wav_files = collect_wav_files("assets/audio/")?;
     for file in wav_files {
@@ -56,6 +57,8 @@ fn main() -> io::Result<()> {
             Err(e) => eprintln!("Error reading {}: {}", file, e),
         }
     }
+
+    
 
     Ok(())
 }
